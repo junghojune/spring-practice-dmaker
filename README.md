@@ -1,5 +1,5 @@
 # spring-practice-dmaker
-practice spring boot 
+과제를 만들며 다시한번 정확하게 spring에서 사용하는 각각의 의미를 파악하며 공부한다. 
 
 
 # Transaction
