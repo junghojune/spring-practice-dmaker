@@ -2,16 +2,14 @@ package com.dmaker.controller;
 
 
 import com.dmaker.dto.CreateDeveloper;
+import com.dmaker.dto.DeveloperDetailDto;
+import com.dmaker.dto.DeveloperDto;
 import com.dmaker.service.DMakerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Arrays;
 import java.util.List;
 
 @Slf4j // 간단하게 로그를 찍어주는 기능
@@ -24,12 +22,23 @@ public class DmakerController {
 
 
     @GetMapping("/developers")
-    public List<String> getAllDeverlopers() {
+    public List<DeveloperDto> getAllDeverlopers() {
 
         // GET /developeres HTTP/1.1
         log.info("GET .developers HTTP/1.1");
 
-        return Arrays.asList("snow", "Elsa", "Olaf");
+        return dMakerService.getAllDevelopers();
+    }
+
+    @GetMapping("/developer/{memberId}")
+    public DeveloperDetailDto getDeverloperDetail(
+            @PathVariable String memberId
+    ) {
+
+        // GET /developeres HTTP/1.1
+        log.info("GET .developers HTTP/1.1");
+
+        return dMakerService.getDeveloperDetail(memberId);
     }
 
     @PostMapping("/create-developer")
