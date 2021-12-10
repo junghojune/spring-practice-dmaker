@@ -1,5 +1,6 @@
 package com.dmaker.dto;
 
+import com.dmaker.entity.Developer;
 import com.dmaker.type.DeveloperLevel;
 import com.dmaker.type.DeveloperSkillType;
 import lombok.*;
@@ -29,7 +30,7 @@ public class CreateDeveloper {
         @NotNull
         @Min(0)
         @Max(20)
-        private Integer experienceYear;
+        private Integer experienceYears;
 
         @NotNull
         @Size(min = 3, max = 50, message = "memberId size must 3-50")
@@ -52,8 +53,16 @@ public class CreateDeveloper {
     public static class Response {
         private DeveloperLevel developerLevel;
         private DeveloperSkillType developerSkillType;
-        private Integer experienceYear;
-
+        private Integer experienceYears;
         private String memberId;
+
+        public static Response fromEntity(Developer developer) {
+            return Response.builder()
+                    .developerLevel(developer.getDeveloperLevel())
+                    .developerSkillType(developer.getDeveloperSkillType())
+                    .experienceYears(developer.getExperienceYears())
+                    .memberId(developer.getMemberId())
+                    .build();
+        }
     }
 }

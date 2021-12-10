@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 @Slf4j // 간단하게 로그를 찍어주는 기능
@@ -34,18 +33,15 @@ public class DmakerController {
     }
 
     @PostMapping("/create-developer")
-    public List<String> createDeverlopers(
+    public CreateDeveloper.Response createDevelopers(
             @Valid @RequestBody CreateDeveloper.Request request
 
     ) {
         // GET /developeres HTTP/1.1
         log.info("request : {}", request);
-        dMakerService.createDeveloper(request);
-        return Collections.singletonList("Olaf");
+
+        return dMakerService.createDeveloper(request);
     }
-
-
-
 
 
 }
