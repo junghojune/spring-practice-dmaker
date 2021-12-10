@@ -4,6 +4,7 @@ package com.dmaker.controller;
 import com.dmaker.dto.CreateDeveloper;
 import com.dmaker.dto.DeveloperDetailDto;
 import com.dmaker.dto.DeveloperDto;
+import com.dmaker.dto.EditDeveloper;
 import com.dmaker.service.DMakerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -52,5 +53,14 @@ public class DmakerController {
         return dMakerService.createDeveloper(request);
     }
 
+    // 정보 수정지 put이 적당함
+    @PutMapping("/developer/{memberId}")
+    public DeveloperDetailDto editDeveloper(
+            @PathVariable final String memberId,
+            @Valid @RequestBody final EditDeveloper.Request request
+    ) {
+        log.info("GET /developers HTTP/1.1");
 
+        return dMakerService.editDeveloper(memberId, request);
+    }
 }
