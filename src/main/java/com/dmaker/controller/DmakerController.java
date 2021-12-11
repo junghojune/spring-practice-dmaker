@@ -1,15 +1,15 @@
 package com.dmaker.controller;
 
 
-import com.dmaker.dto.CreateDeveloper;
-import com.dmaker.dto.DeveloperDetailDto;
-import com.dmaker.dto.DeveloperDto;
-import com.dmaker.dto.EditDeveloper;
+import com.dmaker.dto.*;
+import com.dmaker.exception.DMakerException;
 import com.dmaker.service.DMakerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -70,4 +70,22 @@ public class DmakerController {
     ) {
         return dMakerService.deleteDeveloper(memberId);
     }
+
+
+    @ResponseStatus(value = HttpStatus.CONFLICT)
+    // controller 안에서 일어나는 모든 exception을 처리해준다.
+    @ExceptionHandler(DMakerException.class)
+    public DMakerErrorResponse handleExeption(
+            DMakerException e,
+            HttpServletRequest request
+    ) {
+        log.error("errorCode : {}, url : {}, message : {}",
+                e.getDMakerErrorCode(), request.getRequestURI(), e.getDetailMessage());
+
+        return DMakerErrorResponse.builder()
+                .errorCode(e.getDMakerErrorCode())
+                .errorMessage(e.getDetailMessage())
+                .build();
+    }
+
 }
