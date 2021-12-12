@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 public class DMakerExceptionHandler {
     // 예외 처리가 필요한 이유
     // 에러 메세지가 낮은 수준에 이유를 포함하여 뜬다면 화면쪽에서는 이유를 알 수 없는 에러가 생기기 시작하면서
-    // 버그를 픽스할때 어려움이 생길수 있다.
+    // 버그를 픽스할때 어려움이 생길수 있다.`
     // 또한 에러 메세지에 너무 자세한 에러가 표시된다면 보안에 취약해질 수 있다.
     @ExceptionHandler(DMakerException.class)
     public DMakerErrorResponse handleExeption(
