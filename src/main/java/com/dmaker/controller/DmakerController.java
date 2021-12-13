@@ -33,7 +33,7 @@ public class DmakerController {
 
     @GetMapping("/developer/{memberId}")
     public DeveloperDetailDto getDeverloperDetail(
-            @PathVariable String memberId
+            @PathVariable final String memberId // request로 들어온 변수들은 값이 변하면 안되기 때문에 final로 설정
     ) {
 
         // GET /developeres HTTP/1.1
@@ -44,7 +44,7 @@ public class DmakerController {
 
     @PostMapping("/create-developer")
     public CreateDeveloper.Response createDevelopers(
-            @Valid @RequestBody CreateDeveloper.Request request
+            @Valid @RequestBody final CreateDeveloper.Request request
 
     ) {
         // GET /developeres HTTP/1.1
